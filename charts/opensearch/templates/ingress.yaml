@@ -1,5 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "opensearch.uname" . -}}
+{{- if eq .Values.nodeGroup "master" }}
+{{- $fullName = include "opensearch.masterService" . -}}
+{{- end }}
 {{- $servicePort := .Values.httpPort -}}
 {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: networking.k8s.io/v1beta1
